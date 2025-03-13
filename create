@@ -1,0 +1,28 @@
+#!/bin/env bash
+
+if [[ $1 == "--help" ]]; then
+    cat <<EOF
+Usage: ./script_name filename.c
+Description: This script creates a new C file with a boilerplate template.
+
+Options:
+  --help     Show this help message
+EOF
+    exit 0
+fi
+
+DEST_DIR=./src
+FULLPATH="$DEST_DIR/$1"
+STARTER_FILE=./boilerplate.c
+
+mkdir -p "$DEST_DIR"
+
+if [[ -f $STARTER_FILE ]]; then
+	cat $STARTER_FILE >"$FULLPATH"
+	echo "Create $FULLPATH  with boilerplate code."
+else
+	echo "Error: boilerplate.c not found in the current directory."
+	exit 1
+fi
+
+code "$FULLPATH"
